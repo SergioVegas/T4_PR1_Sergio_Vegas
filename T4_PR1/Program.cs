@@ -20,7 +20,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+app.MapRazorPages();
+    app.MapGet("/", () => Results.Redirect("/Menu"));
 
 app.Run();
