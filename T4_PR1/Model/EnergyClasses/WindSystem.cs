@@ -20,7 +20,7 @@ namespace T3._PR1._Practica_1.EnegyClass
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                windVelocity = HelperClass.CheckTypeDouble();
+                windVelocity = Tools.CheckTypeDouble();
             }
             WindVelocity = windVelocity;
         }

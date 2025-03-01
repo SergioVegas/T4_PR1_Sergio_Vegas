@@ -18,7 +18,7 @@ namespace T3._PR1._Practica_1.EnegyClass
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                waterFlow = HelperClass.CheckTypeDouble();
+                waterFlow = Tools.CheckTypeDouble();
             }
             WaterFlow = waterFlow;
         }
