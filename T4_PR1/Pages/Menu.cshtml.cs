@@ -8,7 +8,7 @@ namespace T4_PR1.Pages
         private readonly ILogger<MenuModel> _logger;
 
         //
-        public string Message { get; set; }
+        public string TitleMessage { get; set; }
         //
 
         public MenuModel(ILogger<MenuModel> logger)
@@ -19,7 +19,7 @@ namespace T4_PR1.Pages
         public void OnGet()
         {
             
-            Message = "EcoEnergy Solutions";
+            TitleMessage = "EcoEnergy Solutions";
             
         }
     }
