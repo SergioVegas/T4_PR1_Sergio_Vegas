@@ -18,9 +18,9 @@ namespace T4_PR1.Pages
 
         public void OnGet()
         {
-            //
-            Message = "Hello World!";
-            //
+            
+            Message = "EcoEnergy Solutions";
+            
         }
     }
 }
