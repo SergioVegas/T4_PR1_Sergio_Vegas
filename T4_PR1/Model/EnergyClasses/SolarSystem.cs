@@ -19,7 +19,7 @@ namespace T3._PR1._Practica_1.EnegyClass
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                sunHours = Tools.CheckTypeDouble();
+                sunHours = Tools.CheckValues.CheckTypeDouble();
             }
             SunHours = sunHours;
         }
