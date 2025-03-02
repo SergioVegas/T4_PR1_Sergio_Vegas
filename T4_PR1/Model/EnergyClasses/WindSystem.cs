@@ -7,7 +7,7 @@ using T3._PR1.EnergyClasses;
 
 namespace T3._PR1._Practica_1.EnegyClass
 {
-    public class WindSystem : EnergySystem, IEnergyCalculate
+    public class WindSystem : EnergySystem
     {
 
         private string minimumMsg = "La velocitat del vent no pot ser menor a {0}, torna a introduir un número.";
@@ -20,24 +20,15 @@ namespace T3._PR1._Practica_1.EnegyClass
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                windVelocity = Tools.CheckTypeDouble();
+                windVelocity = Tools.CheckValues.CheckTypeDouble();
             }
             WindVelocity = windVelocity;
         }
-        public  double CalculateEnergy( double energy)
+        public override void CalculateEnergy( )
         {
-            return Math.Round(Math.Pow(energy, 3) * 0.2, 2); 
+            GeneratedEnergy= Math.Round(Math.Pow(WindVelocity, 3) * 0.2, 2); 
         }
-        public override void ShowEnergyCalculated(double energy)
-        {
-            Console.WriteLine();
-            Console.WriteLine( $"La energia calculada és {energy} Juls");
-        }
-        
-        public string GetInfoRegistre(DateTime data, double resultenergy)
-        {
-            return $"| {data} |       Eolic       |    {resultenergy} Juls    |";
-        }
+       
         public override bool Equals(object? obj) 
         {
             if (obj == null) return false;

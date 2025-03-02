@@ -7,7 +7,7 @@ using T3._PR1.EnergyClasses;
 
 namespace T3._PR1._Practica_1.EnegyClass
 {
-    public class HidroelectricSystem : EnergySystem, IEnergyCalculate
+    public class HidroelectricSystem : EnergySystem
     {
         private string minimumMsg = "El caudal de l'aigua no pot ser menor a {0}, torna a introduir un número.";
         private double _limit = 20;
@@ -18,23 +18,13 @@ namespace T3._PR1._Practica_1.EnegyClass
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                waterFlow = Tools.CheckTypeDouble();
+                waterFlow = Tools.CheckValues.CheckTypeDouble();
             }
             WaterFlow = waterFlow;
         }
-        public double CalculateEnergy(double energy)
+        public override void CalculateEnergy()
         {
-            return Math.Round(energy * 9.8 * 0.8, 2);
+            GeneratedEnergy= Math.Round(WaterFlow * 9.8 * 0.8, 2);
         }
-        public override void ShowEnergyCalculated(double energy)
-        {
-            Console.WriteLine();
-            Console.WriteLine($"La energia calculada és {energy} Juls");
-        }
-        public string GetInfoRegistre (DateTime data, double resultenergy )
-        {
-            return $"| {data}  |   Hidroelèctric   |    {resultenergy} Juls    |";
-        }
-
     }
 }

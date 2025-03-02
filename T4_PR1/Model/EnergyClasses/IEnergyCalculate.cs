@@ -8,8 +8,8 @@ namespace T3._PR1.EnergyClasses
 {
     interface  IEnergyCalculate
     {
-        public abstract double CalculateEnergy(double energy);
-        public abstract void ConfigurarParametres(double energy);
-        public abstract void MostrarInforme(double energy);
+        void CalculateEnergy();
+        void ConfigurateParameters();
+        string GetInfoRegistre();
     }
 }
