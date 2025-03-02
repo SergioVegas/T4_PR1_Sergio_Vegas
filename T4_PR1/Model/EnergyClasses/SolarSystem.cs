@@ -15,13 +15,16 @@ namespace T3._PR1._Practica_1.EnegyClass
          
         public SolarSystem(double sunHours, DateTime date) : base(date)
         {
-            while (sunHours < _limit)
+            SunHours = sunHours;
+        }
+        public override void ConfigurateParameters()
+        {
+            while (SunHours < _limit)
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                sunHours = Tools.CheckValues.CheckTypeDouble();
+                SunHours = Tools.CheckValues.CheckTypeDouble();
             }
-            SunHours = sunHours;
         }
         public  override void CalculateEnergy()
         {

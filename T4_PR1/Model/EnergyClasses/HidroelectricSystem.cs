@@ -14,13 +14,17 @@ namespace T3._PR1._Practica_1.EnegyClass
         public double WaterFlow {  get; set; }       
         public HidroelectricSystem(double waterFlow, DateTime date): base(date)
         {
-            while (waterFlow < _limit)
+          
+            WaterFlow = waterFlow;
+        }
+        public override void ConfigurateParameters()
+        {
+            while (WaterFlow < _limit)
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                waterFlow = Tools.CheckValues.CheckTypeDouble();
+                WaterFlow = Tools.CheckValues.CheckTypeDouble();
             }
-            WaterFlow = waterFlow;
         }
         public override void CalculateEnergy()
         {

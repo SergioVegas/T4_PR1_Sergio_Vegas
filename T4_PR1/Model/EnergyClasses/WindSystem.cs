@@ -16,13 +16,16 @@ namespace T3._PR1._Practica_1.EnegyClass
 
         public WindSystem (double windVelocity, DateTime date) : base(date)
         {
-            while (windVelocity < _limit)
+            WindVelocity = WindVelocity;
+        }
+        public override void ConfigurateParameters()
+        {
+            while (WindVelocity < _limit)
             {
                 Console.WriteLine(string.Format(minimumMsg, _limit));
                 Console.WriteLine();
-                windVelocity = Tools.CheckValues.CheckTypeDouble();
-            }
-            WindVelocity = windVelocity;
+                WindVelocity = Tools.CheckValues.CheckTypeDouble();
+            } 
         }
         public override void CalculateEnergy( )
         {
