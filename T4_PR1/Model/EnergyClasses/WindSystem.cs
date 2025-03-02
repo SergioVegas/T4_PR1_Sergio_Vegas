@@ -29,7 +29,7 @@ namespace T3._PR1._Practica_1.EnegyClass
         }
         public override void CalculateEnergy( )
         {
-            GeneratedEnergy= Math.Round(Math.Pow(WindVelocity, 3) * 0.2, 2); 
+            GeneratedEnergy= Math.Round(Math.Pow(WindVelocity, 3) * Rati); 
         }
        
         public override bool Equals(object? obj) 

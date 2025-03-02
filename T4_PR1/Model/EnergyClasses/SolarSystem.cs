@@ -28,7 +28,7 @@ namespace T3._PR1._Practica_1.EnegyClass
         }
         public  override void CalculateEnergy()
         {
-            GeneratedEnergy= Math.Round(SunHours * 1.5, 2);
+            GeneratedEnergy= Math.Round(SunHours * Rati, 2);
         }  
 
     }
