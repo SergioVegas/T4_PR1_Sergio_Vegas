@@ -1,4 +1,4 @@
-﻿namespace T4_PR1.Model.EnergyClasses
+﻿namespace T4_PR1.Model
 {
     public class WaterConsumption
     {
