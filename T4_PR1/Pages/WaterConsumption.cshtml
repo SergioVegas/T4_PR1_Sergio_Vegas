@@ -7,7 +7,43 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+
 <br />
+
+<h2>Anàlisis estadístiques</h2>
+
+<h3>
+    Top 10 Municipis amb major consum
+</h3>
+@if (Model.Top10Municipalities.Any())
+{
+    <ul>
+        @foreach (var municipality in Model.Top10Municipalities)
+        {
+            <li>@municipality.Region - Consum Total: @municipality.Total</li>
+        }
+    </ul>
+}
+else
+{
+     <p>No hi ha dades disponitbles</p>
+}
+
+<h3>
+    Consum mitjà per comarca
+</h3>
+<h3>
+    Municipis amb consum sospitós
+</h3>
+<h3>
+
+    Municipis amb tendència creixent en els últims 5 anys
+</h3>
+
+<br />
+
+<h2>Resum consum realitzats</h2>
+
 @if (Model.HeaderRow != null)
 {
     <table class="table">
@@ -58,3 +94,4 @@ else
         Següent
     </a>
 </div>
+
