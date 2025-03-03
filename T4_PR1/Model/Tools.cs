@@ -1,12 +1,16 @@
-﻿using System;
+﻿using CsvHelper.Configuration;
+using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using T4_PR1.Model;
 
-namespace T3._PR1
+namespace T4._PR1
 {
     public static class Tools
     {
@@ -100,5 +104,6 @@ namespace T3._PR1
                 return needCheck;
             }
         }
+       
     }
 }

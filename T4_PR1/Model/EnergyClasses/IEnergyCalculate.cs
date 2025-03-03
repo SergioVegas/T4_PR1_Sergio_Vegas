@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace T3._PR1.EnergyClasses
+namespace T4._PR1.EnergyClasses
 {
     interface  IEnergyCalculate
     {

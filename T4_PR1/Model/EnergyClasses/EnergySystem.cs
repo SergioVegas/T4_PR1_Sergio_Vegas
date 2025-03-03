@@ -4,10 +4,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using T3._PR1.EnergyClasses;
+using T4._PR1.EnergyClasses;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace T3._PR1._Practica_1.EnegyClass
+namespace T4._PR1._Practica_1.EnegyClass
 {
     public enum TypeEnergy { Solar, Eolica, Hidroelectrica }
     public abstract class EnergySystem : IEnergyCalculate
