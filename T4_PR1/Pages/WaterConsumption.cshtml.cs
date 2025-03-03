@@ -23,7 +23,7 @@ namespace T4_PR1.Pages
 
         // Propietats per less estadistiques
         public List<WaterConsumption> Top10Municipalities { get; set; } = new List<WaterConsumption>();
-        public List<(string Comarca, double AverageConsumption)> AverageConsumptionByRegion { get; set; } = new List<(string, double)>();
+        public List<(string? Comarca, double AverageConsumption)> AverageConsumptionByRegion { get; set; } = new List<(string, double)>();
         public List<WaterConsumption> SuspiciousConsumptionMunicipalities { get; set; } = new List<WaterConsumption>();
         public List<WaterConsumption> IncreasingTrendMunicipalities { get; set; } = new List<WaterConsumption>();
         public void OnGet(int? pageNumber)
@@ -62,12 +62,29 @@ namespace T4_PR1.Pages
             {
                 return; 
             }
-
+            //Top 10 Municipis amb major consum
             int mostRecentYear = WaterConsumptions.Max(w => w.Year);
             Top10Municipalities = WaterConsumptions
                 .Where(w=>w.Year == mostRecentYear)
                 .OrderByDescending(w=>w.Total)
                 .Take(10)
+                .ToList();
+            //Consum mitjà per comarca
+            AverageConsumptionByRegion = WaterConsumptions
+                .GroupBy(w => w.Region)
+                .Select(g =>( Comarca : g.Key, Average :Math.Round(g.Average(w => w.Total), 2)))
+                .OrderByDescending(w => w.Average)
+                .ToList();
+            //Detecció de valors de consum sospitosos
+            int suspiciusDigits = 6;
+            SuspiciousConsumptionMunicipalities = WaterConsumptions
+                .Where(w => ((long)w.Total) > suspiciusDigits)
+                .ToList();
+            //Detectar si el consum d'aigua d'un municipi ha anat augmentant en els últims 5 anys
+            int lastYears = 5;
+            int actualYear = DateTime.Now.Year;
+            IncreasingTrendMunicipalities = WaterConsumptions
+                .Where (w => w.Year >=(actualYear-lastYears))
                 .ToList();
         }
     }

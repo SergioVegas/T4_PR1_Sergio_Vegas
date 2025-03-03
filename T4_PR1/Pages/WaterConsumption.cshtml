@@ -32,13 +32,51 @@ else
 <h3>
     Consum mitjà per comarca
 </h3>
+@if (Model.AverageConsumptionByRegion.Any())
+{
+    <ul>
+        @foreach (var average in Model.AverageConsumptionByRegion)
+        {
+            <li>@average.Comarca - Mitjana: @average.AverageConsumption</li>
+        }
+    </ul>
+}
+else
+{
+     <p>No hi ha dades disponitbles</p>
+}
 <h3>
     Municipis amb consum sospitós
 </h3>
+@if (Model.SuspiciousConsumptionMunicipalities.Any())
+{
+    <ul>
+        @foreach (var consumption in Model.SuspiciousConsumptionMunicipalities)
+        {
+            <li>@consumption.Region - Consum Total: @consumption.Total</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hi ha dades disponitbles</p>
+}
 <h3>
-
     Municipis amb tendència creixent en els últims 5 anys
 </h3>
+@if (Model.SuspiciousConsumptionMunicipalities.Any())
+{
+    <ul>
+        @foreach (var consumption in Model.SuspiciousConsumptionMunicipalities)
+        {
+            <li>@consumption.Region - Consum Total: @consumption.Total</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hi ha dades disponitbles</p>
+}
 
 <br />
 
