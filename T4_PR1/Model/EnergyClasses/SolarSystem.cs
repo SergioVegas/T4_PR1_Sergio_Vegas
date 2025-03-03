@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using T3._PR1.EnergyClasses;
+using T4._PR1.EnergyClasses;
 
-namespace T3._PR1._Practica_1.EnegyClass
+namespace T4._PR1._Practica_1.EnegyClass
 {
     public  class SolarSystem : EnergySystem
     {
