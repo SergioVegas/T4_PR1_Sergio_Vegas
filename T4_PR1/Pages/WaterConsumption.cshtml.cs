@@ -52,8 +52,8 @@ namespace T4_PR1.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al leer el archivo CSV.");
-                ModelState.AddModelError(string.Empty, "Ocurrió un error al cargar los datos. Por favor, inténtalo de nuevo.");
+                _logger.LogError(ex, "Error al llegir l'archiu CSV.");
+                ModelState.AddModelError(string.Empty, "Error al carrega les dades.");
             }
         }
         public void ConsumptionWaterAnalisis()
@@ -76,7 +76,7 @@ namespace T4_PR1.Pages
                 .OrderByDescending(w => w.Average)
                 .ToList();
             //Detecció de valors de consum sospitosos
-            int suspiciusDigits = 999999;
+            int suspiciusDigits = 99999999; //He posat 8 digits, perque no cupi tant espai a la pagina web
             SuspiciousConsumptionMunicipalities = WaterConsumptions
                 .Where(w => ((long)w.Total) > suspiciusDigits)
                 .ToList();
