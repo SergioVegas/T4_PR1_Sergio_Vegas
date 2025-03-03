@@ -76,7 +76,7 @@ namespace T4_PR1.Pages
                 .OrderByDescending(w => w.Average)
                 .ToList();
             //Detecció de valors de consum sospitosos
-            int suspiciusDigits = 6;
+            int suspiciusDigits = 999999;
             SuspiciousConsumptionMunicipalities = WaterConsumptions
                 .Where(w => ((long)w.Total) > suspiciusDigits)
                 .ToList();
@@ -85,7 +85,17 @@ namespace T4_PR1.Pages
             int actualYear = DateTime.Now.Year;
             IncreasingTrendMunicipalities = WaterConsumptions
                 .Where (w => w.Year >=(actualYear-lastYears))
+                .GroupBy(w => w.Region)
+                .Where(g =>
+                {
+                    var lastFiveYears = g.OrderBy(w => w.Year).TakeLast(5).ToList();
+                    if (lastFiveYears.Count < lastYears) return false; 
+                    return lastFiveYears.Zip(lastFiveYears.Skip(1), (a, b) => a.Total < b.Total).All(x => x); 
+                })
+                .SelectMany(g => g)
+                .Distinct()
                 .ToList();
         }
     }
+    
 }
