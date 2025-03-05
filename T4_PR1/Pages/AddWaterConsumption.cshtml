@@ -55,12 +55,14 @@
         <span asp-validation-for="NewWaterConsumption.DomesticConsumptionCapita" class="text-danger"></span>
     </div>
 
+    <br />
+
     <button type="submit" class="btn btn-primary">Afegir</button>
 </form>
 
 @if (!string.IsNullOrEmpty(Model.Message))
 {
-    <div class="alert @Model.MessageType" role="alert">
+    <div class="alert" role="alert">
         @Model.Message
     </div>
 }

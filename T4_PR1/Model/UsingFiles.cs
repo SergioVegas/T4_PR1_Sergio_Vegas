@@ -1,10 +1,18 @@
 ﻿using CsvHelper.Configuration;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace T4_PR1.Model
 {
     public class UsingFiles
-    {
+    {  /// <summary>
+       /// Llegeix una llista d'objectes de tipus T des d'un fitxer CSV.
+       /// </summary>
+       /// <typeparam name="T">El tipus d'objecte a deserialitzar.</typeparam>
+       /// <param name="filePath">El camí al fitxer CSV.</param>
+       /// <param name="config">Configuració opcional per al lector CSV. Si és null, s'utilitzarà una configuració per defecte amb el delimitador ",".</param>
+       /// <returns>Una llista d'objectes de tipus T deserialitzats del fitxer CSV.</returns>
+       /// <exception cref="Exception">Es llança si hi ha un error durant la lectura del fitxer CSV.</exception>
         public static class CsvHelperTool
         {
             public static List<T> ReadCsvFile<T>(string filePath, CsvConfiguration? config = null)
@@ -31,27 +39,62 @@ namespace T4_PR1.Model
         }
         public static class XMLHelperTool
         {
-            public static List<T> ReadXMLFile<T>(string filePath, CsvConfiguration? config = null)
+            /// <summary>
+            /// Llegeix una llista d'objectes de tipus T des d'un fitxer XML.
+            /// </summary>
+            /// <typeparam name="T">El tipus d'objecte a deserialitzar.</typeparam>
+            /// <param name="filePath">El camí al fitxer XML.</param>
+            /// <returns>Una llista d'objectes de tipus T deserialitzats del fitxer XML, o una llista buida si el fitxer no existeix o es produeix un error.</returns>
+            public static List<T> ReadXMLFile<T>(string filePath)
             {
+                List<T> objects = new List<T>();
+                XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
+
+                if (!File.Exists(filePath))
+                {
+                    return objects; 
+                }
+
                 try
                 {
-
-                    var csvConfig = config ?? new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = "," };
-
-                    using (var reader = new StreamReader(filePath))
-
-                    using (var csv = new CsvHelper.CsvReader(reader, csvConfig))
+                    using (FileStream file = File.OpenRead(filePath))
                     {
-                        var records = csv.GetRecords<T>().ToList();
-                        return records;
+                        objects = (List<T>)serializer.Deserialize(file);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error reading CSV file: {ex.Message}");
-                    throw;
+                    Console.WriteLine($"Error llegint el fitxer XML : {ex.Message}");
+                    throw; 
+                }
+
+                return objects;
+            }
+
+            /// <summary>
+            /// Escriu una llista d'objectes de tipus T a un fitxer XML, sobreescrivint el fitxer si existeix.
+            /// </summary>
+            /// <typeparam name="T">El tipus d'objecte a serialitzar.</typeparam>
+            /// <param name="objects">La llista d'objectes a serialitzar.</param>
+            /// <param name="filePath">El camí al fitxer XML.</param>
+            public static void WriteXMLFile<T>(List<T> objects, string filePath)
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<T>)); 
+
+                try
+                {
+                    using (FileStream file = File.Create(filePath))
+                    {
+                        serializer.Serialize(file, objects);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error escribint en  el fitxer XML: {ex.Message}");
+                    throw; 
                 }
             }
         }
     }
+
 }
