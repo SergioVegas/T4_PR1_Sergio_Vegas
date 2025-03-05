@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Xml.Serialization;
 using T4_PR1.Model;
 
 namespace T4_PR1.Pages
@@ -36,7 +35,7 @@ namespace T4_PR1.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al procesar l'archu XML.");
+                _logger.LogError(ex, "Error al procesar l'archiu XML.");
                 Message = "Error al guardar consum d'aigua.";
                 return Page();
             }

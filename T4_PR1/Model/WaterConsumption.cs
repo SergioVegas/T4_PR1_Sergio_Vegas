@@ -1,12 +1,15 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace T4_PR1.Model
 {
     public class WaterConsumption
     {
+        [Required(ErrorMessage = "L'any és obligatori.")]
         [Name("Any")]
         public int Year { get; set; }
 
+        [Required(ErrorMessage = "El codi de la comarca és obligatori.")]
         [Name("Codi comarca")]
         public int RegionCode { get; set; }
 

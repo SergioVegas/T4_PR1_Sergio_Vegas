@@ -8,14 +8,14 @@
 
 <form method="post">
     <div class="form-group">
-        <label asp-for="NewWaterConsumption.Year">Any</label>
-        <input asp-for="NewWaterConsumption.Year" class="form-control" />
+        <label asp-for="NewWaterConsumption.Year">Any:</label>
+        <input type ="number" asp-for="NewWaterConsumption.Year" class="form-control" />
         <span asp-validation-for="NewWaterConsumption.Year" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="NewWaterConsumption.RegionCode">Codi comarca</label>
-        <input asp-for="NewWaterConsumption.RegionCode" class="form-control" />
+        <input type="number" asp-for="NewWaterConsumption.RegionCode" class="form-control" />
         <span asp-validation-for="NewWaterConsumption.RegionCode" class="text-danger"></span>
     </div>
 
@@ -66,3 +66,7 @@
         @Model.Message
     </div>
 }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
