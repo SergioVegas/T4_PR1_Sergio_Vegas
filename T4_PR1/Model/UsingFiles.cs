@@ -1,5 +1,7 @@
 ﻿using CsvHelper.Configuration;
 using System.Globalization;
+using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace T4_PR1.Model
@@ -52,7 +54,7 @@ namespace T4_PR1.Model
 
                 if (!File.Exists(filePath))
                 {
-                    return objects; 
+                    return objects;
                 }
 
                 try
@@ -65,12 +67,11 @@ namespace T4_PR1.Model
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error llegint el fitxer XML : {ex.Message}");
-                    throw; 
+                    throw;
                 }
 
                 return objects;
             }
-
             /// <summary>
             /// Escriu una llista d'objectes de tipus T a un fitxer XML, sobreescrivint el fitxer si existeix.
             /// </summary>
@@ -79,7 +80,7 @@ namespace T4_PR1.Model
             /// <param name="filePath">El camí al fitxer XML.</param>
             public static void WriteXMLFile<T>(List<T> objects, string filePath)
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<T>)); 
+                XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
 
                 try
                 {
@@ -91,10 +92,11 @@ namespace T4_PR1.Model
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error escribint en  el fitxer XML: {ex.Message}");
-                    throw; 
+                    throw;
                 }
             }
         }
+
     }
 
 }

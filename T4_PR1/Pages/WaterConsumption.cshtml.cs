@@ -57,7 +57,7 @@ namespace T4_PR1.Pages
                 }
                 WaterConsumptions = UsingFiles.CsvHelperTool.ReadCsvFile<WaterConsumption>(filePathCsv);
 
-                WaterConsumptions.AddRange(XmlWaterConsumptions); //Agegim el llistat xml a la llista del csv
+                WaterConsumptions.AddRange(XmlWaterConsumptions); //Afegim el llistat xml a la llista del csv
 
                 TotalPages = (int)Math.Ceiling((double)WaterConsumptions.Count / PageSize);
 
