@@ -26,6 +26,9 @@ namespace T4_PR1.Pages
         public List<(string? Comarca, double AverageConsumption)> AverageConsumptionByRegion { get; set; } = new List<(string, double)>();
         public List<WaterConsumption> SuspiciousConsumptionMunicipalities { get; set; } = new List<WaterConsumption>();
         public List<WaterConsumption> IncreasingTrendMunicipalities { get; set; } = new List<WaterConsumption>();
+
+        public List<WaterConsumption> XmlWaterConsumptions { get; set; } = new List<WaterConsumption>();
+        public bool XmlFileExists { get; set; } = false;
         public void OnGet(int? pageNumber)
         {
             if (pageNumber.HasValue)
@@ -33,10 +36,29 @@ namespace T4_PR1.Pages
                 PageNumber = pageNumber.Value;
             }
 
-            string filePath = @"ModelData\consum_aigua_cat_per_comarques.csv";
+            string filePathCsv = Path.Combine("ModelData","consum_aigua_cat_per_comarques.csv");
+            string xmlFilePath = Path.Combine("ModelData","water_consumption_data.xml");
             try
             {
-                WaterConsumptions = UsingFiles.CsvHelperTool.ReadCsvFile<WaterConsumption>(filePath);
+                if (System.IO.File.Exists(xmlFilePath))
+                {
+                    try
+                    {
+                        XmlWaterConsumptions = UsingFiles.XMLHelperTool.ReadXMLFile<WaterConsumption>(xmlFilePath);
+                        XmlFileExists = true;
+                    }
+                    catch (Exception xmlEx)
+                    {
+                        _logger.LogError(xmlEx, "Error en llegir el fitxer XML.");
+                        ModelState.AddModelError(string.Empty, "Error al carregar les dades del fitxer XML.");
+                        XmlWaterConsumptions = new List<WaterConsumption>();
+                        XmlFileExists = false;
+                    }
+                }
+                WaterConsumptions = UsingFiles.CsvHelperTool.ReadCsvFile<WaterConsumption>(filePathCsv);
+
+                WaterConsumptions.AddRange(XmlWaterConsumptions); //Afegim el llistat xml a la llista del csv
+
                 TotalPages = (int)Math.Ceiling((double)WaterConsumptions.Count / PageSize);
 
                 // Obte les dades de la pagina actual
@@ -45,15 +67,15 @@ namespace T4_PR1.Pages
                     .Take(PageSize)
                     .ToList();
 
-                
                 HeaderRow = CurrentPageWaterConsumptions.FirstOrDefault() ?? new WaterConsumption(); //  Assegurem que sempre hi hagui una capçalera, agafant la primera linea del archiu o tornant una nova instancia
 
+               
                 ConsumptionWaterAnalisis();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al leer el archivo CSV.");
-                ModelState.AddModelError(string.Empty, "Ocurrió un error al cargar los datos. Por favor, inténtalo de nuevo.");
+                _logger.LogError(ex, "Error al llegir l'archiu CSV.");
+                ModelState.AddModelError(string.Empty, "Error al carrega les dades.");
             }
         }
         public void ConsumptionWaterAnalisis()
@@ -76,7 +98,7 @@ namespace T4_PR1.Pages
                 .OrderByDescending(w => w.Average)
                 .ToList();
             //Detecció de valors de consum sospitosos
-            int suspiciusDigits = 999999;
+            int suspiciusDigits = 99999999; //He posat 8 digits, perque no cupi tant espai a la pagina web
             SuspiciousConsumptionMunicipalities = WaterConsumptions
                 .Where(w => ((long)w.Total) > suspiciusDigits)
                 .ToList();
