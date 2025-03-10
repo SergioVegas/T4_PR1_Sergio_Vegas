@@ -1,4 +1,64 @@
 ﻿@page
 @model T4_PR1.Pages.EnergyIndicatorModel
 @{
+    ViewData["Title"] = "Indicador energetic";
+    string prevDisabled = Model.PageNumber <= 1 ? "disabled" : "";
+    string nextDisabled = Model.PageNumber >= Model.TotalPages ? "disabled" : "";
 }
+<h1>@ViewData["Title"]</h1>
+<br />
+<h2>Resum consum realitzats</h2>
+
+@if (Model.HeaderRow != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.Year)</th>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.RegionCode)</th>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.Region)</th>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.Population)</th>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.DomesticNet)</th>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.EconomyActivity)</th>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.Total)</th>
+                <th>@Html.DisplayNameFor(model => model.HeaderRow.DomesticConsumptionCapita)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CurrentPageEnergeticIndicators)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Year)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RegionCode)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Region)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Population)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DomesticNet)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EconomyActivity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DomesticConsumptionCapita)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No hi ha dades disponibles.</p>
+}
+
+<div class="pagination">
+    <a asp-page="./WaterConsumption" asp-route-pageNumber="@(Model.PageNumber - 1)"
+       class="btn btn-primary @prevDisabled">
+        Anterior
+    </a>
+
+    <span>Pàgina @Model.PageNumber de @Model.TotalPages</span>
+
+    <a asp-page="./WaterConsumption" asp-route-pageNumber="@(Model.PageNumber + 1)"
+       class="btn btn-primary @nextDisabled">
+        Següent
+    </a>
+</div>
+<br />
+<a asp-page="./AddEnergyIndicator" class="btn btn-primary">Afegir</a>
+
