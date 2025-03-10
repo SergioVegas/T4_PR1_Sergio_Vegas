@@ -34,7 +34,7 @@ namespace T4_PR1.Model
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error reading CSV file: {ex.Message}");
+                    Console.WriteLine($"Error lleguint l'arxiu CSV : {ex.Message}");
                     throw; 
                 }
             }
