@@ -41,7 +41,7 @@ namespace T4_PR1.Pages
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Error al cargar los datos: " + ex.Message);
+                ModelState.AddModelError(string.Empty, "Error carregant less dades: " + ex.Message);
             }
         }
     }
