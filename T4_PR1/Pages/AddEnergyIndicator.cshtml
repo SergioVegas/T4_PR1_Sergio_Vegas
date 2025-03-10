@@ -1,0 +1,44 @@
+﻿@page
+@model T4_PR1.Pages.AddEnergyIndicatorModel
+@{
+}
+<form method="post">
+    <div class="form-group">
+        <label asp-for="NewWEnergeticIndicator.Data">Data:</label>
+        <input type="number" asp-for="NewWEnergeticIndicator.Data" class="form-control" />
+        <span asp-validation-for="NewWEnergeticIndicator.Data" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NewWEnergeticIndicator.CDEEBC_ProdNeta">CDEEBC_ProdNeta:</label>
+        <input type="number" asp-for="NewWEnergeticIndicator.CDEEBC_ProdNeta" class="form-control" />
+        <span asp-validation-for="NewWEnergeticIndicator.CDEEBC_ProdNeta" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewWEnergeticIndicator.CCAC_GasolinaAuto">CCAC_GasolinaAuto:</label>
+        <input type="number" asp-for="NewWEnergeticIndicator.CCAC_GasolinaAuto" class="form-control" />
+        <span asp-validation-for="NewWEnergeticIndicator.CCAC_GasolinaAuto" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewWEnergeticIndicator.CDEEBC_DemandaElectr">CDEEBC_DemandaElectr:</label>
+        <input type="number" asp-for="NewWEnergeticIndicator.CDEEBC_DemandaElectr" class="form-control" />
+        <span asp-validation-for="NewWEnergeticIndicator.CDEEBC_DemandaElectr" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewWEnergeticIndicator.CDEEBC_ProdDisp">CDEEBC_ProdDisp:</label>
+        <input type="number" asp-for="NewWEnergeticIndicator.CDEEBC_ProdDisp" class="form-control" />
+        <span asp-validation-for="NewWEnergeticIndicator.CDEEBC_ProdDisp" class="text-danger"></span>
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-primary">Afegir</button>
+</form>
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert" role="alert">
+        @Model.Message
+    </div>
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

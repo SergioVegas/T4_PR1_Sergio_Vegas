@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration;
+using Newtonsoft.Json;
 using System.Globalization;
 using System.Text;
 using System.Xml;
@@ -93,6 +94,40 @@ namespace T4_PR1.Model
                 {
                     Console.WriteLine($"Error escribint en  el fitxer XML: {ex.Message}");
                     throw;
+                }
+            }
+        }
+        /// <summary>
+        /// Afegeix dades a un fitxer JSON existent (si existeix) o crea un fitxer nou (si no existeix).
+        /// </summary>
+        /// <typeparam name="T">El tipus d'objecte a la llista.</typeparam>
+        /// <param name="filePath">La ruta completa al fitxer JSON.</param>
+        /// <param name="newData">La llista d'objectes a serialitzar i desar al fitxer.</param>
+        /// <param name="logger">(Opcional) Un objecte ILogger per registrar esdeveniments i errors.</param>
+        public static class JSONHelperTool
+        {
+            public static void WriteJsonFile<T>(string filePath, List<T> newData)
+            {
+                try
+                {
+                    List<T> existingData = new List<T>();
+
+                    if (File.Exists(filePath))
+                    {  
+                            string existingJson = File.ReadAllText(filePath);
+                            existingData = JsonConvert.DeserializeObject<List<T>>(existingJson) ?? new List<T>();
+                    }
+                    existingData.AddRange(newData);
+
+                    string jsonData = JsonConvert.SerializeObject(existingData, Newtonsoft.Json.Formatting.Indented);
+                    File.WriteAllText(filePath, jsonData);
+
+               
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine( $"\"Error escribint en  el fitxer JSON: {ex.Message}");
+                    
                 }
             }
         }

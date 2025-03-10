@@ -101,7 +101,7 @@ namespace T4_PR1.Model
         public string? FEEI_AlimBegudaTabac { get; set; }
 
         [Name("FEEI_TextilConfecCuirCalçat")]
-        public string? FEEI_TextilConfecCuirCalsat { get; set; }
+        public string? FEEI_TextilConfecCuirCalçat { get; set; }
 
         [Name("FEEI_PastaPaperCartro")]
         public string? FEEI_PastaPaperCartro { get; set; }
