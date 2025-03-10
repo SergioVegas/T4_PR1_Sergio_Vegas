@@ -2,7 +2,8 @@
 @model T4_PR1.Pages.EnergyIndicatorModel
 @{
     ViewData["Title"] = "Indicador energetic";
-   
+    string prevDisabled = Model.PageNumber <= 1 ? "disabled" : "";
+    string nextDisabled = Model.PageNumber >= Model.TotalPages ? "disabled" : "";
 }
 <h1>@ViewData["Title"]</h1>
 <br />
@@ -56,7 +57,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.EnergeticIndicators)
+        @foreach (var item in Model.CurrentPageEnergeticIndicators)
             {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.Data)</td>
@@ -103,12 +104,21 @@
             }
         </tbody>
     </table>
-}
-else
-{
-    <p>No hi ha dades disponibles.</p>
-}
 
+
+<div class="pagination">
+    <a asp-page="./EnergyIndicator" asp-route-pageNumber="@(Model.PageNumber - 1)"
+       class="btn btn-primary @prevDisabled">
+        Anterior
+    </a>
+
+    <span>Pàgina @Model.PageNumber de @Model.TotalPages </span>
+
+    <a asp-page="./EnergyIndicator" asp-route-pageNumber="@(Model.PageNumber + 1)"
+       class="btn btn-primary @nextDisabled">
+        Següent
+    </a>
+</div>
 <br />
 <a asp-page="./AddEnergyIndicator" class="btn btn-primary">Afegir</a>
 

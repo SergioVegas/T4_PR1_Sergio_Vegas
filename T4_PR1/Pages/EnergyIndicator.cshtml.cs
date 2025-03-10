@@ -12,19 +12,36 @@ namespace T4_PR1.Pages
             _logger = logger;
         }
         public List<EnergeticIndicator> EnergeticIndicators { get; set; } = new List<EnergeticIndicator>();
+        public List<EnergeticIndicator> CurrentPageEnergeticIndicators { get; set; } = new List<EnergeticIndicator>();
+        [BindProperty(SupportsGet = true)]
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 50;
+        public int TotalPages { get; set; }
 
-        public void OnGet()
+        public void OnGet(int? pageNumber)
         {
+            if (pageNumber.HasValue)
+            {
+                PageNumber = pageNumber.Value;
+            }
+
             string filePathCsv = Path.Combine("ModelData", "indicadors_energetics_cat.csv");
 
             try
             {
-                EnergeticIndicators = UsingFiles.CsvHelperTool.ReadCsvFile<EnergeticIndicator>(filePathCsv); // sin csvConfig
+                EnergeticIndicators = UsingFiles.CsvHelperTool.ReadCsvFile<EnergeticIndicator>(filePathCsv);
+
+                TotalPages = (int)Math.Ceiling((double)EnergeticIndicators.Count / PageSize);
+
+                // Obten las datos de la pagina actual
+                CurrentPageEnergeticIndicators = EnergeticIndicators
+                    .Skip((PageNumber - 1) * PageSize)
+                    .Take(PageSize)
+                    .ToList();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error reading the CSV file.");
-                ModelState.AddModelError(string.Empty, "Error loading data: " + ex.Message);
+                ModelState.AddModelError(string.Empty, "Error al cargar los datos: " + ex.Message);
             }
         }
     }
