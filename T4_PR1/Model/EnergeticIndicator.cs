@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace T4_PR1.Model
 {
@@ -32,12 +33,14 @@ namespace T4_PR1.Model
         public double CDEEBC_ConsumAux { get; set; }
 
         [Name("CDEEBC_ProdNeta")]
+        [Required(ErrorMessage = "El CDEEBC_ProdNeta  és obligatori.")]
         public double CDEEBC_ProdNeta { get; set; }
 
         [Name("CDEEBC_ConsumBomb")]
         public double CDEEBC_ConsumBomb { get; set; }
 
         [Name("CDEEBC_ProdDisp")]
+        [Required(ErrorMessage = "El CDEEBC_ProdDisp  és obligatori.")]
         public double CDEEBC_ProdDisp { get; set; }
 
         [Name("CDEEBC_TotVendesXarxaCentral")]
@@ -47,6 +50,7 @@ namespace T4_PR1.Model
         public double CDEEBC_SaldoIntercanviElectr { get; set; }
 
         [Name("CDEEBC_DemandaElectr")]
+        [Required(ErrorMessage = "El CDEEBC_DemandaElectr  és obligatori.")]
         public double CDEEBC_DemandaElectr { get; set; }
 
         [Name("CDEEBC_TotalEBCMercatRegulat")]
@@ -101,7 +105,7 @@ namespace T4_PR1.Model
         public string? FEEI_AlimBegudaTabac { get; set; }
 
         [Name("FEEI_TextilConfecCuirCalçat")]
-        public string? FEEI_TextilConfecCuirCalsat { get; set; }
+        public string? FEEI_TextilConfecCuirCalçat { get; set; }
 
         [Name("FEEI_PastaPaperCartro")]
         public string? FEEI_PastaPaperCartro { get; set; }
@@ -119,6 +123,7 @@ namespace T4_PR1.Model
         public double DGGN_ConsumGNCentrTerm { get; set; }
 
         [Name("CCAC_GasolinaAuto")]
+        [Required(ErrorMessage = "El CCAC_GasolinaAuto  és obligatori.")]
         public double CCAC_GasolinaAuto { get; set; }
 
         [Name("CCAC_GasoilA")]
