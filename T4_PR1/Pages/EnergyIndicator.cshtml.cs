@@ -35,17 +35,13 @@ namespace T4_PR1.Pages
             try
             {
                 EnergeticIndicators = UsingFiles.CsvHelperTool.ReadCsvFile<EnergeticIndicator>(filePathCsv);
-                if(System.IO.File.Exists(filePathJson))
+                /*if(System.IO.File.Exists(filePathJson))
                 {
                     List<EnergeticIndicator> indicadorsJson =new List<EnergeticIndicator>();
                     UsingFiles.JSONHelperTool.ReadJsonFile(filePathJson, indicadorsJson);
                     EnergeticIndicators.AddRange(indicadorsJson);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, $"Error: El fitxer JSON '{filePathJson}' no s'ha trobat.");
-                    return;
-                }
+                }*/
+              
                 TotalPages = (int)Math.Ceiling((double)EnergeticIndicators.Count / PageSize);
 
                 // Obten las datos de la pagina actual
@@ -53,6 +49,7 @@ namespace T4_PR1.Pages
                     .Skip((PageNumber - 1) * PageSize)
                     .Take(PageSize)
                     .ToList();
+
                 EnergyIndicatorsAnalisis();
             }
             catch (Exception ex)
