@@ -24,11 +24,11 @@ namespace T4_PR1.Pages
             {
                 return Page();
             }
-            string JsonFilePath = Path.Combine("ModelData", "indicadors_energetics_cat.json"); 
+            string filePathJson = Path.Combine("ModelData", "indicadors_energetics_cat.json"); 
             try
             {
                 List<EnergeticIndicator> energeticIndicators = new List<EnergeticIndicator> { NewWEnergeticIndicator };
-                UsingFiles.JSONHelperTool.WriteJsonFile(JsonFilePath, energeticIndicators);
+                UsingFiles.JSONHelperTool.WriteJsonFile(filePathJson, energeticIndicators);
                 
 
                 return RedirectToPage("/EnergyIndicator");

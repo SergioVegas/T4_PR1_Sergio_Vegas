@@ -2,10 +2,12 @@
 @model T4_PR1.Pages.AddEnergyIndicatorModel
 @{
 }
+
+<br />
 <form method="post">
     <div class="form-group">
         <label asp-for="NewWEnergeticIndicator.Data">Data:</label>
-        <input type="number" asp-for="NewWEnergeticIndicator.Data" class="form-control" />
+        <input  asp-for="NewWEnergeticIndicator.Data" class="form-control" />
         <span asp-validation-for="NewWEnergeticIndicator.Data" class="text-danger"></span>
     </div>
 

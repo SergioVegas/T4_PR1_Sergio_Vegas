@@ -1,5 +1,6 @@
 ﻿using CsvHelper.Configuration;
 using Newtonsoft.Json;
+using System;
 using System.Globalization;
 using System.Text;
 using System.Xml;
@@ -128,6 +129,18 @@ namespace T4_PR1.Model
                 {
                     Console.WriteLine( $"\"Error escribint en  el fitxer JSON: {ex.Message}");
                     
+                }
+            }
+            public static void ReadJsonFile<T>(string filePath, List<T> informationJson)
+            {
+                try
+                {
+                    informationJson = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(filePath));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\"Error lleguint el fitxer JSON: {ex.Message}");
+
                 }
             }
         }
