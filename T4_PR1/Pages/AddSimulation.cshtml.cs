@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 using T4._PR1._Practica_1.EnegyClass;
 using T4_PR1.Model.EnergyClasses;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -46,9 +45,10 @@ namespace T4_PR1.Pages
         public IActionResult OnPost()
         {
             Simulation simulacio;
-            switch (EnergySelected)
+            switch (SistemaEnergia.Name)
             {
-                case "solar":
+                case TypeEnergy.Solar:
+                    Console.WriteLine("-------------->Funciona el switch");
                     simulacio = new Simulation
                     {
                         DateSimulation = SistemaEnergia.DateSimulation,
@@ -63,7 +63,7 @@ namespace T4_PR1.Pages
                     };
 
                     break;
-                case "wind":
+                case TypeEnergy.Eolica:
                      simulacio = new Simulation
                     {
                         DateSimulation = SistemaEnergia.DateSimulation,
@@ -77,7 +77,7 @@ namespace T4_PR1.Pages
                         TotalCost = SistemaEnergia.CalculateTotalCost()
                     };
                     break;
-                case "hidro":
+                case TypeEnergy.Hidroelectrica:
                     simulacio = new Simulation
                     {
                         DateSimulation = SistemaEnergia.DateSimulation,

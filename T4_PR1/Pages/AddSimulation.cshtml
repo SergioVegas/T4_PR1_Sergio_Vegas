@@ -1,5 +1,6 @@
 ﻿@page
 @model T4_PR1.Pages.AddSimulationModel
+@using T4._PR1._Practica_1.EnegyClass
 @{
 	ViewData["Title"] = "Afegir simulació";
 }
@@ -9,7 +10,7 @@
 
     <div class="form-group">
 		<label asp-for="SistemaEnergia.Name">Tipus de sistema</label>
-		<select id="tipusSelector" asp-for="SistemaEnergia.Name" asp-items="Html.GetEnumSelectList<TypeEnergy>()" class="form-control">
+		<select id="selector" asp-for="SistemaEnergia.Name" asp-items="Html.GetEnumSelectList<TypeEnergy>()" class="form-control">
 			<option value="" selected>Selecciona un tipus de sistema</option>
 		</select>
 	</div>
@@ -51,7 +52,7 @@
 	</div>
 	<div id="water" style="display: none;">
 		<div class="form-group">
-			<label asp-for="SistemaHidroelectric.WaterFlow">Cabal d'aigua'</label>
+			<label asp-for="SistemaHidroelectric.WaterFlow">Cabal d'aigua</label>
 			<input asp-for="SistemaHidroelectric.WaterFlow" class="form-control" value="" />
 			<span asp-validation-for="SistemaHidroelectric.WaterFlow" class="text-danger"></span>
 		</div>
@@ -62,6 +63,6 @@
  <button type="submit" class="btn btn-primary">Afegir</button>
 </form>
 @section Scripts {
-	<script src="~/js/visibilitatPropietats.js"></script>
+	<script src="~/js/ViewFormularySimulation.js"></script>
 	<partial name="_ValidationScriptsPartial" />
 }
