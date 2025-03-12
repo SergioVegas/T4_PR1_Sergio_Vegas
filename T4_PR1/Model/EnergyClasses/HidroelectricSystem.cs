@@ -9,26 +9,24 @@ namespace T4._PR1._Practica_1.EnegyClass
 {
     public class HidroelectricSystem : EnergySystem
     {
+        private double waterFlow;
         private string minimumMsg = "El caudal de l'aigua no pot ser menor a {0}, torna a introduir un número.";
         private double _limit = 20;
-        public double WaterFlow {  get; set; }       
-        public HidroelectricSystem(double waterFlow, DateTime date): base(date)
-        {
-          
-            WaterFlow = waterFlow;
-        }
-        public override void ConfigurateParameters()
-        {
-            while (WaterFlow < _limit)
+
+        public double WaterFlow {
+            get { return waterFlow; }
+            set
             {
-                Console.WriteLine(string.Format(minimumMsg, _limit));
-                Console.WriteLine();
-                WaterFlow = Tools.CheckValues.CheckTypeDouble();
+                if (!(value >= _limit)) throw new ArgumentException(minimumMsg);
+                waterFlow = value;
             }
-        }
-        public override void CalculateEnergy()
+        }  
+        public HidroelectricSystem() { }
+        
+       
+        public override double CalculateEnergy()
         {
-            GeneratedEnergy= Math.Round(WaterFlow * 9.8 * Rati, 2);
+           return  GeneratedEnergy= Math.Round(WaterFlow * 9.8 * Rati, 2);
         }
     }
 }
