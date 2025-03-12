@@ -99,11 +99,13 @@ namespace T4_PR1.Model
                     
                 }
             }
-            public static void ReadJsonFile<T>(string jsonFromFile, List<T> informationJson)
+            public static void ReadJsonFile<T>(string filePathJSON, List<T> informationJson)
             {
                 try
                 {
-                    informationJson = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(jsonFromFile));
+                    string  jsonFromFile = System.IO.File.ReadAllText(filePathJSON);
+                    var records = System.Text.Json.JsonSerializer.Deserialize<List<T>>(jsonFromFile);
+                    informationJson.AddRange(records);
                 }
                 catch (Exception ex)
                 {

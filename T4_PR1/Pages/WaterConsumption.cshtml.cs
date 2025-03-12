@@ -47,7 +47,7 @@ namespace T4_PR1.Pages
                     if (System.IO.File.Exists(xmlFilePath))
                     {
 
-                        XDocument doc = XDocument.Load(xmlFilePath);
+                       XDocument doc = XDocument.Load(xmlFilePath);
                        var  XmlWaterConsumptions = doc.Root.Elements("Consum")
                            .Select(x => new WaterConsumption
                            {
