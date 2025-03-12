@@ -17,15 +17,15 @@ namespace T4._PR1._Practica_1.EnegyClass
         
         
         public SolarSystem() { }
-        //Constructor amb més carga logica
+        //Constructor amb més càrrega lògica
         public SolarSystem(double sunHours, DateTime date, TypeEnergy name, double costEnergy, double priceEnergy, double rati, double generatedEnergy, double totalCost, double totalPrice) :base(date, name, costEnergy, priceEnergy, rati, generatedEnergy, totalCost, totalPrice)
         {
             SunHours = sunHours;
         }
-        public  override double CalculateEnergy()
-        {
-            return  Math.Round(SunHours * Rati, 2);
-        }  
-
+        /// <summary>
+        /// Calcula la energia generda d'un sitema d'enegia solar
+        /// </summary>
+        /// <returns>Energia calculada</returns>
+        public  override double CalculateEnergy() => Math.Round(SunHours * Rati, 2);
     }
 }
