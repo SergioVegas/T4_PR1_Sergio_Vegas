@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -10,20 +11,13 @@ namespace T4._PR1._Practica_1.EnegyClass
 {
     public  class SolarSystem : EnergySystem
     {
-        private double sunHours;
-        private string minimumMsg = "Les hores de sol no poden ser menors a {0}, torna a introduir un número.";
-        private double _limit = 1;
-        public double SunHours {
-            get { return sunHours; }
-            set
-            {
-                if (!(value >= _limit)) throw new ArgumentException(minimumMsg);
-                sunHours = value;
-            }
-        }
 
+        [Required, Range(1, double.MaxValue, ErrorMessage = "Les hores de sol no poden ser menors a 1, torna a introduir un número.")] // he intentat posa el missatge en un camp privat, pero no funciona. ex: [Required, Range(1, double.MaxValue, ErrorMessage = nameof(minimumMsg))]
+        public double SunHours { set; get; }
+        
+        
         public SolarSystem() { }
-
+        //Constructor amb més carga logica
         public SolarSystem(double sunHours, DateTime date, TypeEnergy name, double costEnergy, double priceEnergy, double rati, double generatedEnergy, double totalCost, double totalPrice) :base(date, name, costEnergy, priceEnergy, rati, generatedEnergy, totalCost, totalPrice)
         {
             SunHours = sunHours;

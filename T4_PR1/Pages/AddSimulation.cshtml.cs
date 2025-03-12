@@ -27,46 +27,31 @@ namespace T4_PR1.Pages
         [BindProperty]
         public HidroelectricSystem SistemaHidroelectric { get; set; }
 
-        public List<SelectListItem> Options { get; set; }
-
-        
-
-        public void OnGet()
-        {
-            // Inicialitza les opcions del desplegable
-            Options = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "solar", Text = "Sitema solar" },
-                new SelectListItem { Value = "wind", Text = "Sistema hidroelectric" },
-                new SelectListItem { Value = "hidro", Text = "Sistema eolic" }
-            };
-        }
-
         public IActionResult OnPost()
         {
-            Simulation simulacio;
+            Simulation simulacio= null;
             switch (SistemaEnergia.Name)
             {
                 case TypeEnergy.Solar:
-                    Console.WriteLine("-------------->Funciona el switch");
-                    simulacio = new Simulation
-                    {
-                        DateSimulation = SistemaEnergia.DateSimulation,
-                        EnergyType = TypeEnergy.Solar,
-                        EnergyNeeded = SistemaSolar.SunHours,
-                        CostEnergy = SistemaEnergia.CostEnergy,
-                        PriceEnergy = SistemaEnergia.PriceEnergy,
-                        Rati = SistemaEnergia.Rati,
-                        GeneratedEnergy = SistemaEnergia.CalculateEnergy(),
-                        TotalPrice = SistemaEnergia.CalculateTotalPrice(),
-                        TotalCost = SistemaEnergia.CalculateTotalCost()
-                    };
-
+                    //Console.WriteLine("-------------->Funciona el switch");
+                        simulacio = new Simulation
+                        {
+                            DateSimulation = DateTime.Now,
+                            EnergyType = TypeEnergy.Solar,
+                            EnergyNeeded = SistemaSolar.SunHours,
+                            CostEnergy = SistemaEnergia.CostEnergy,
+                            PriceEnergy = SistemaEnergia.PriceEnergy,
+                            Rati = SistemaEnergia.Rati,
+                            GeneratedEnergy = SistemaEnergia.CalculateEnergy(),
+                            TotalPrice = SistemaEnergia.CalculateTotalPrice(),
+                            TotalCost = SistemaEnergia.CalculateTotalCost()
+                        };
                     break;
+
                 case TypeEnergy.Eolica:
                      simulacio = new Simulation
                     {
-                        DateSimulation = SistemaEnergia.DateSimulation,
+                        DateSimulation = DateTime.Now,
                         EnergyType = TypeEnergy.Eolica,
                         EnergyNeeded = SistemaEolic.WindVelocity,
                         CostEnergy = SistemaEnergia.CostEnergy,
@@ -80,7 +65,7 @@ namespace T4_PR1.Pages
                 case TypeEnergy.Hidroelectrica:
                     simulacio = new Simulation
                     {
-                        DateSimulation = SistemaEnergia.DateSimulation,
+                        DateSimulation = DateTime.Now,
                         EnergyType = TypeEnergy.Hidroelectrica,
                         EnergyNeeded = SistemaHidroelectric.WaterFlow,
                         CostEnergy = SistemaEnergia.CostEnergy,

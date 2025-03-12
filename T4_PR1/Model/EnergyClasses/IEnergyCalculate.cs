@@ -11,6 +11,5 @@ namespace T4._PR1.EnergyClasses
         double CalculateEnergy();
         double CalculateTotalCost();
         double CalculateTotalPrice();
-        string GetInfoRegistre();
     }
 }

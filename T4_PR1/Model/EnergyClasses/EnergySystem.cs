@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,15 @@ namespace T4._PR1._Practica_1.EnegyClass
     public enum TypeEnergy { Solar, Eolica, Hidroelectrica }
     public  class EnergySystem : IEnergyCalculate
     {
-
+        
         public DateTime DateSimulation {  get; set; }
+        [Required(ErrorMessage = "No has escollit cap valor!")]
         public TypeEnergy Name { get; set; }
+        [Required(ErrorMessage = "Aquest camp és obligatori")]
         public double CostEnergy { get; set; }
+        [Required(ErrorMessage = "Aquest camp és obligatori")]
         public double PriceEnergy { get; set; }
+        [Required(ErrorMessage = "Aquest camp és obligatori")]
         public double Rati { get; set; }
         public double GeneratedEnergy { get;  set; }
         public double TotalPrice { set; get; }
@@ -29,10 +34,6 @@ namespace T4._PR1._Practica_1.EnegyClass
 
         public double CalculateTotalCost() => CostEnergy * GeneratedEnergy;
         public double CalculateTotalPrice()=> CostEnergy * PriceEnergy;
-        public virtual string GetInfoRegistre()
-        {
-            return $"| {DateSimulation} |      {Name}     |    {GeneratedEnergy} Juls    |";
-        }
 
     }
 }

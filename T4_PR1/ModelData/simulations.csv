@@ -1,2 +1,5 @@
 DateSimulation;EnergyType;EnergyNeeded;CostEnergy;PriceEnergy;Rati;GeneratedEnergy;TotalPrice;TotalCost
 02/01/0002 22:00:00;Solar;3;1;13;1;0;13;0
+02/02/0002 02:02:00;Solar;1;1;1;1;0;1;0
+03/12/2025 22:58:05;Solar;1;2;3;2;0;6;0
+03/12/2025 22:58:28;Eolica;5;3;3;2;0;9;0
