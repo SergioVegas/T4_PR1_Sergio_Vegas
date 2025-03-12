@@ -8,8 +8,8 @@ namespace T4._PR1.EnergyClasses
 {
     interface  IEnergyCalculate
     {
-        void CalculateEnergy();
-        void ConfigurateParameters();
-        string GetInfoRegistre();
+        double CalculateEnergy();
+        double CalculateTotalCost();
+        double CalculateTotalPrice();
     }
 }

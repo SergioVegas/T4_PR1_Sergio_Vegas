@@ -13,6 +13,7 @@ namespace T4_PR1.Pages
         }
         public List<EnergeticIndicator> EnergeticIndicators { get; set; } = new List<EnergeticIndicator>();
         public List<EnergeticIndicator> CurrentPageEnergeticIndicators { get; set; } = new List<EnergeticIndicator>();
+        public List<EnergeticIndicator> EnergeticIndicatorsJson { get; set; } = new List<EnergeticIndicator>();
         [BindProperty(SupportsGet = true)]
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 50;
@@ -35,16 +36,17 @@ namespace T4_PR1.Pages
             try
             {
                 EnergeticIndicators = UsingFiles.CsvHelperTool.ReadCsvFile<EnergeticIndicator>(filePathCsv);
-                /*if(System.IO.File.Exists(filePathJson))
+                if(System.IO.File.Exists(filePathJson))
                 {
-                    List<EnergeticIndicator> indicadorsJson =new List<EnergeticIndicator>();
-                    UsingFiles.JSONHelperTool.ReadJsonFile(filePathJson, indicadorsJson);
-                    EnergeticIndicators.AddRange(indicadorsJson);
-                }*/
+
+                    UsingFiles.JSONHelperTool.ReadJsonFile(filePathJson, EnergeticIndicatorsJson);
+                    //Console.WriteLine("-------------> llegueixo el json");
+                }
               
                 TotalPages = (int)Math.Ceiling((double)EnergeticIndicators.Count / PageSize);
 
-                // Obten las datos de la pagina actual
+                EnergeticIndicators.AddRange(EnergeticIndicatorsJson);
+                //Obte les daes de la pàgina actual
                 CurrentPageEnergeticIndicators = EnergeticIndicators
                     .Skip((PageNumber - 1) * PageSize)
                     .Take(PageSize)
@@ -70,21 +72,21 @@ namespace T4_PR1.Pages
                 .OrderBy(w => w.CDEEBC_ProdNeta)
                 .ToList();
             //Registres amb consum de gasolina superior a 100
-            int GasConsumptionAsked = 100;
+           /* int GasConsumptionAsked = 100;
             var gasOver100 = EnergeticIndicators
                 .Where(w => w.CCAC_GasolinaAuto > GasConsumptionAsked)
                 .OrderByDescending(w => w.CCAC_GasolinaAuto)
                 .ToList();
             //Mitjana de producció neta per cada any
-            var mitjanaProduccioNetaPerAny = EnergeticIndicators
-                .GroupBy(e => e.Data.Substring(3, 4)) 
+           *var mitjanaProduccioNetaPerAny = EnergeticIndicators
+                .GroupBy(e => e.Data.(3, 4)) 
                 .Select(g => new
                 {
                     Any = g.Key,
                     Mitjana = g.Average(e => e.CDEEBC_ProdNeta)
                 })
                 .OrderBy(a => a.Any)
-                .ToList();
+                .ToList();*/
             //Registres amb demanda elèctrica superior a 4000 i producció disponible inferior a 300
 
             int electricDemandAsked = 4000;

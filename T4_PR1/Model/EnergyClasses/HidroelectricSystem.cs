@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,26 +10,20 @@ namespace T4._PR1._Practica_1.EnegyClass
 {
     public class HidroelectricSystem : EnergySystem
     {
-        private string minimumMsg = "El caudal de l'aigua no pot ser menor a {0}, torna a introduir un número.";
-        private double _limit = 20;
-        public double WaterFlow {  get; set; }       
-        public HidroelectricSystem(double waterFlow, DateTime date): base(date)
+
+        [Required, Range(20, double.MaxValue, ErrorMessage = "El caudal de l'aigua no pot ser menor a 20, torna a introduir un número.")]
+        public double WaterFlow { set; get; }
+        //Constructor amb més carga logica
+        public HidroelectricSystem(double waterFlow, DateTime date, TypeEnergy name, double costEnergy, double priceEnergy, double rati, double generatedEnergy, double totalCost, double totalPrice) : base(date, name, costEnergy, priceEnergy, rati, generatedEnergy, totalCost, totalPrice)
         {
-          
             WaterFlow = waterFlow;
         }
-        public override void ConfigurateParameters()
+        public HidroelectricSystem() { }
+        
+       
+        public override double CalculateEnergy()
         {
-            while (WaterFlow < _limit)
-            {
-                Console.WriteLine(string.Format(minimumMsg, _limit));
-                Console.WriteLine();
-                WaterFlow = Tools.CheckValues.CheckTypeDouble();
-            }
-        }
-        public override void CalculateEnergy()
-        {
-            GeneratedEnergy= Math.Round(WaterFlow * 9.8 * Rati, 2);
+           return  GeneratedEnergy= Math.Round(WaterFlow * 9.8 * Rati, 2);
         }
     }
 }

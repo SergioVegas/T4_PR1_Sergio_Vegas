@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -10,22 +11,29 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace T4._PR1._Practica_1.EnegyClass
 {
     public enum TypeEnergy { Solar, Eolica, Hidroelectrica }
-    public abstract class EnergySystem : IEnergyCalculate
+    public  class EnergySystem : IEnergyCalculate
     {
-        protected  DateTime Date {  get; set; }
-        protected TypeEnergy Name { get; set; }
-        protected double CostEnergy { get; set; }
-        protected double PriceEnergy { get; set; }
-        protected double Rati { get; set; }
-        protected double GeneratedEnergy { get;  set; }
-        EnergySystem() { }
-        protected EnergySystem(DateTime date) { Date = date; }
-        public abstract void ConfigurateParameters();
-        public abstract void CalculateEnergy();
-        public virtual string GetInfoRegistre()
-        {
-            return $"| {Date} |      {Name}     |    {GeneratedEnergy} Juls    |";
-        }
+        
+        public DateTime DateSimulation {  get; set; }
+        [Required(ErrorMessage = "No has escollit cap valor!")]
+        public TypeEnergy Name { get; set; }
+        [Required(ErrorMessage = "Aquest camp és obligatori")]
+        public double CostEnergy { get; set; }
+        [Required(ErrorMessage = "Aquest camp és obligatori")]
+        public double PriceEnergy { get; set; }
+        [Required(ErrorMessage = "Aquest camp és obligatori")]
+        public double Rati { get; set; }
+        public double GeneratedEnergy { get;  set; }
+        public double TotalPrice { set; get; }
+        public double TotalCost { set; get; }
+        public  EnergySystem() { }
+        public EnergySystem (DateTime date, TypeEnergy name, double costEnergy,double priceEnergy, double rati, double generatedEnergy, double totalCost, double totalPrice) 
+        { DateSimulation = date;  Name = name; CostEnergy = costEnergy; PriceEnergy = priceEnergy; Rati = rati; GeneratedEnergy = generatedEnergy; TotalPrice = totalPrice; TotalCost = totalCost; }
+     
+        public virtual double CalculateEnergy()=>0;
+
+        public double CalculateTotalCost() => CostEnergy * GeneratedEnergy;
+        public double CalculateTotalPrice()=> CostEnergy * PriceEnergy;
 
     }
 }

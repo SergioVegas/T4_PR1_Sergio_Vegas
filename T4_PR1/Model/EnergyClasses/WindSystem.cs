@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,44 +10,20 @@ namespace T4._PR1._Practica_1.EnegyClass
 {
     public class WindSystem : EnergySystem
     {
+        [Required, Range(5, double.MaxValue, ErrorMessage = "La velocitat del vent no pot ser menor a 5, torna a introduir un número.")]
+        public double WindVelocity { set; get; }
 
-        private string minimumMsg = "La velocitat del vent no pot ser menor a {0}, torna a introduir un número.";
-        private double _limit =5;
-        public double WindVelocity { get; set; }
-
-        public WindSystem (double windVelocity, DateTime date) : base(date)
+        //Constructor amb més carga logica
+        public WindSystem(double windVelocity, DateTime date, TypeEnergy name, double costEnergy, double priceEnergy, double rati, double generatedEnergy, double totalCost, double totalPrice) : base(date, name, costEnergy, priceEnergy, rati, generatedEnergy, totalCost, totalPrice)
         {
-            WindVelocity = WindVelocity;
+            WindVelocity = windVelocity;
         }
-        public override void ConfigurateParameters()
+        public WindSystem() { }
+      
+        
+        public override double CalculateEnergy( )
         {
-            while (WindVelocity < _limit)
-            {
-                Console.WriteLine(string.Format(minimumMsg, _limit));
-                Console.WriteLine();
-                WindVelocity = Tools.CheckValues.CheckTypeDouble();
-            } 
+           return  GeneratedEnergy= Math.Round(Math.Pow(WindVelocity, 3) * Rati); 
         }
-        public override void CalculateEnergy( )
-        {
-            GeneratedEnergy= Math.Round(Math.Pow(WindVelocity, 3) * Rati); 
-        }
-       
-        public override bool Equals(object? obj) 
-        {
-            if (obj == null) return false;
-            if (!(obj is WindSystem)) return false;
-
-            return (this.WindVelocity == ((WindSystem)obj).WindVelocity) && (this.Date ==((WindSystem)obj).Date);
-        }
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(WindVelocity, Date);
-        }
-        public override string ToString()
-        {
-            return $"Es {WindVelocity} i {Date}";
-        }
-
     }
 }
