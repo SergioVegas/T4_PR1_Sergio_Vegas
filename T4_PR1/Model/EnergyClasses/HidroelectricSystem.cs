@@ -23,7 +23,7 @@ namespace T4._PR1._Practica_1.EnegyClass
        
         public override double CalculateEnergy()
         {
-           return  GeneratedEnergy= Math.Round(WaterFlow * 9.8 * Rati, 2);
+           return Math.Round(WaterFlow * 9.8 * Rati, 2);
         }
     }
 }

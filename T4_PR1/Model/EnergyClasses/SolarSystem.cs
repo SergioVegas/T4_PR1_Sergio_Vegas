@@ -24,7 +24,7 @@ namespace T4._PR1._Practica_1.EnegyClass
         }
         public  override double CalculateEnergy()
         {
-            return GeneratedEnergy= Math.Round(SunHours * Rati, 2);
+            return  Math.Round(SunHours * Rati, 2);
         }  
 
     }
