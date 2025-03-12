@@ -23,7 +23,7 @@ namespace T4._PR1._Practica_1.EnegyClass
         
         public override double CalculateEnergy( )
         {
-           return  GeneratedEnergy= Math.Round(Math.Pow(WindVelocity, 3) * Rati); 
+           return Math.Round(Math.Pow(WindVelocity, 3) * Rati); 
         }
     }
 }

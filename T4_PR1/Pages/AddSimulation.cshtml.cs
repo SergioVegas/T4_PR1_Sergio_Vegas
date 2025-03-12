@@ -42,7 +42,7 @@ namespace T4_PR1.Pages
                             CostEnergy = SistemaEnergia.CostEnergy,
                             PriceEnergy = SistemaEnergia.PriceEnergy,
                             Rati = SistemaEnergia.Rati,
-                            GeneratedEnergy = SistemaEnergia.CalculateEnergy(),
+                            GeneratedEnergy = SistemaSolar.CalculateEnergy(),
                             TotalPrice = SistemaEnergia.CalculateTotalPrice(),
                             TotalCost = SistemaEnergia.CalculateTotalCost()
                         };
@@ -85,7 +85,7 @@ namespace T4_PR1.Pages
             var config = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = !System.IO.File.Exists(fileCSVPath),
-                Delimiter = ";"
+                Delimiter = ","
             };
 
             using (var stream = new StreamWriter(fileCSVPath, append: true))
