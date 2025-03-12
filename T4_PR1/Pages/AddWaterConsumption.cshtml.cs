@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Xml.Linq;
 using T4_PR1.Model;
 
 namespace T4_PR1.Pages
@@ -14,6 +15,7 @@ namespace T4_PR1.Pages
         }
 
         [BindProperty]
+        public WaterConsumption WaterConsumption { get; set; }
         public WaterConsumption NewWaterConsumption { get; set; } = new WaterConsumption();
         public string Message { get; set; } //variable per donar més detalls als errors
       
@@ -27,9 +29,33 @@ namespace T4_PR1.Pages
 
             try
             {
-                List<WaterConsumption> waterConsumptions = UsingFiles.XMLHelperTool.ReadXMLFile<WaterConsumption>(XmlFilePath);
-                waterConsumptions.Add(NewWaterConsumption);
-                UsingFiles.XMLHelperTool.WriteXMLFile(waterConsumptions, XmlFilePath);
+                XDocument doc;
+
+                if (System.IO.File.Exists(XmlFilePath))
+                {
+                    doc = XDocument.Load(XmlFilePath);
+                }
+                else
+                {
+                    doc = new XDocument(
+                        new XDeclaration("1.0", "utf-8", "yes"),
+                        new XElement("Consums")
+                    );
+                }             
+                XElement newConsum = new XElement("Consum",
+                   new XElement("Any", WaterConsumption.Year),
+                   new XElement("CodiComarca", WaterConsumption.RegionCode),
+                   new XElement("Comarca", WaterConsumption.Region),
+                   new XElement("Poblacio", WaterConsumption.Population),
+                   new XElement("DomesticXarxa", WaterConsumption.DomesticNet),
+                   new XElement("ActivitatsEconomiquesIFontsPropies", WaterConsumption.EconomyActivity),
+                   new XElement("Total", WaterConsumption.Total),
+                   new XElement("ConsumDomesticPerCapita", WaterConsumption.DomesticConsumptionCapita));
+
+               
+                doc.Root.Add(newConsum);
+
+                doc.Save(XmlFilePath);
 
                 return RedirectToPage("/WaterConsumption");
             }

@@ -15,20 +15,26 @@ namespace T4_PR1.Model
         public int RegionCode { get; set; }
 
         [Name("Comarca")]
+        [Required(ErrorMessage = "El codi de la comarca és obligatori.")]
         public string? Region { get; set; }
 
         [Name("Població")]
+        [Required(ErrorMessage = "El codi de la comarca és obligatori.")]
         public int Population { get; set; }
 
         [Name("Domèstic xarxa")]
+        [Required(ErrorMessage = "El codi de la comarca és obligatori.")]
         public double DomesticNet { get; set; }
 
         [Name("Activitats econòmiques i fonts pròpies")]
+        [Required(ErrorMessage = "El codi de la comarca és obligatori.")]
         public double EconomyActivity { get; set; }
 
         [Name("Total")]
+        [Required(ErrorMessage = "El codi de la comarca és obligatori.")]
         public double Total { get; set; }
 
+        [Required(ErrorMessage = "El codi de la comarca és obligatori.")]
         [Name("Consum domèstic per càpita")]
         public double DomesticConsumptionCapita { get; set; }
 

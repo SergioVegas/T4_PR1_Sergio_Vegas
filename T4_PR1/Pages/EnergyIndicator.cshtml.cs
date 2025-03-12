@@ -35,16 +35,18 @@ namespace T4_PR1.Pages
             try
             {
                 EnergeticIndicators = UsingFiles.CsvHelperTool.ReadCsvFile<EnergeticIndicator>(filePathCsv);
-                /*if(System.IO.File.Exists(filePathJson))
+                if(System.IO.File.Exists(filePathJson))
                 {
                     List<EnergeticIndicator> indicadorsJson =new List<EnergeticIndicator>();
-                    UsingFiles.JSONHelperTool.ReadJsonFile(filePathJson, indicadorsJson);
+                    string jsonFromFile = System.IO.File.ReadAllText(filePathJson);
+                    UsingFiles.JSONHelperTool.ReadJsonFile(jsonFromFile, indicadorsJson);
                     EnergeticIndicators.AddRange(indicadorsJson);
-                }*/
+                    //Console.WriteLine("-------------> llegueixo el json");
+                }
               
                 TotalPages = (int)Math.Ceiling((double)EnergeticIndicators.Count / PageSize);
 
-                // Obten las datos de la pagina actual
+                //Obte les daes de la pàgina actual
                 CurrentPageEnergeticIndicators = EnergeticIndicators
                     .Skip((PageNumber - 1) * PageSize)
                     .Take(PageSize)

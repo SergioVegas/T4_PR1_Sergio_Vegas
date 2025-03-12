@@ -74,29 +74,6 @@ namespace T4_PR1.Model
 
                 return objects;
             }
-            /// <summary>
-            /// Escriu una llista d'objectes de tipus T a un fitxer XML, sobreescrivint el fitxer si existeix.
-            /// </summary>
-            /// <typeparam name="T">El tipus d'objecte a serialitzar.</typeparam>
-            /// <param name="objects">La llista d'objectes a serialitzar.</param>
-            /// <param name="filePath">El camí al fitxer XML.</param>
-            public static void WriteXMLFile<T>(List<T> objects, string filePath)
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
-
-                try
-                {
-                    using (FileStream file = File.Create(filePath))
-                    {
-                        serializer.Serialize(file, objects);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error escribint en  el fitxer XML: {ex.Message}");
-                    throw;
-                }
-            }
         }
         /// <summary>
         /// Afegeix dades a un fitxer JSON existent (si existeix) o crea un fitxer nou (si no existeix).
@@ -122,8 +99,6 @@ namespace T4_PR1.Model
 
                     string jsonData = JsonConvert.SerializeObject(existingData, Newtonsoft.Json.Formatting.Indented);
                     File.WriteAllText(filePath, jsonData);
-
-               
                 }
                 catch (Exception ex)
                 {
@@ -131,11 +106,11 @@ namespace T4_PR1.Model
                     
                 }
             }
-            public static void ReadJsonFile<T>(string filePath, List<T> informationJson)
+            public static void ReadJsonFile<T>(string jsonFromFile, List<T> informationJson)
             {
                 try
                 {
-                    informationJson = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(filePath));
+                    informationJson = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(jsonFromFile));
                 }
                 catch (Exception ex)
                 {

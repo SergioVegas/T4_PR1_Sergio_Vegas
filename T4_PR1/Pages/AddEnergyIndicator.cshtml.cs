@@ -14,7 +14,8 @@ namespace T4_PR1.Pages
         }
 
         [BindProperty]
-        public EnergeticIndicator NewWEnergeticIndicator { get; set; } = new EnergeticIndicator();
+        public EnergeticIndicator Indicador { get; set; }
+        public List<EnergeticIndicator> NewWEnergeticIndicator { get; set; } 
         public string Message { get; set; } //variable per donar més detalls als errors
 
 
@@ -27,9 +28,38 @@ namespace T4_PR1.Pages
             string filePathJson = Path.Combine("ModelData", "indicadors_energetics_cat.json"); 
             try
             {
-                List<EnergeticIndicator> energeticIndicators = new List<EnergeticIndicator> { NewWEnergeticIndicator };
-                UsingFiles.JSONHelperTool.WriteJsonFile(filePathJson, energeticIndicators);
-                
+
+                if (System.IO.File.Exists(filePathJson))
+                {
+                    string jsonFromFile = System.IO.File.ReadAllText(filePathJson);
+                    var deserializedIndicadors = System.Text.Json.JsonSerializer.Deserialize<List<EnergeticIndicator>>(jsonFromFile);
+                    NewWEnergeticIndicator = deserializedIndicadors.ToList();
+                }
+                else
+                {
+                    NewWEnergeticIndicator = new List<EnergeticIndicator>();
+                }
+              
+                //evitar inserir valors nuls al json
+                foreach (var propietat in typeof(EnergeticIndicator).GetProperties())
+                {
+                    var valorActual = propietat.GetValue(Indicador);
+                    if (valorActual == null)
+                    {
+                        if (propietat.PropertyType == typeof(string))
+                            propietat.SetValue(Indicador, "0.0%");
+                        else if (propietat.PropertyType == typeof(int))
+                            propietat.SetValue(Indicador, 0);
+                        else if (propietat.PropertyType == typeof(double))
+                            propietat.SetValue(Indicador, 0.0);
+                        else if (propietat.PropertyType == typeof(double?))
+                            propietat.SetValue(Indicador, 0.0);
+                        else if (propietat.PropertyType == typeof(DateTime))
+                            propietat.SetValue(Indicador, DateTime.Now);
+                    }
+                }
+                NewWEnergeticIndicator.Add(Indicador);
+                UsingFiles.JSONHelperTool.WriteJsonFile(filePathJson, NewWEnergeticIndicator);
 
                 return RedirectToPage("/EnergyIndicator");
             }
