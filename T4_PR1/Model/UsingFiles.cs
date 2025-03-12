@@ -43,36 +43,29 @@ namespace T4_PR1.Model
         }
         public static class XMLHelperTool
         {
+           
             /// <summary>
-            /// Llegeix una llista d'objectes de tipus T des d'un fitxer XML.
+            /// Escriu una llista d'objectes de tipus T a un fitxer XML, sobreescrivint el fitxer si existeix.
             /// </summary>
-            /// <typeparam name="T">El tipus d'objecte a deserialitzar.</typeparam>
+            /// <typeparam name="T">El tipus d'objecte a serialitzar.</typeparam>
+            /// <param name="objects">La llista d'objectes a serialitzar.</param>
             /// <param name="filePath">El camí al fitxer XML.</param>
-            /// <returns>Una llista d'objectes de tipus T deserialitzats del fitxer XML, o una llista buida si el fitxer no existeix o es produeix un error.</returns>
-            public static List<T> ReadXMLFile<T>(string filePath)
+            public static void WriteXMLFile<T>(List<T> objects, string filePath)
             {
-                List<T> objects = new List<T>();
                 XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
-
-                if (!File.Exists(filePath))
-                {
-                    return objects;
-                }
 
                 try
                 {
-                    using (FileStream file = File.OpenRead(filePath))
+                    using (FileStream file = File.Create(filePath))
                     {
-                        objects = (List<T>)serializer.Deserialize(file);
+                        serializer.Serialize(file, objects);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error llegint el fitxer XML : {ex.Message}");
+                    Console.WriteLine($"Error escribint en  el fitxer XML: {ex.Message}");
                     throw;
                 }
-
-                return objects;
             }
         }
         /// <summary>

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using T4_PR1.Model;
 using CsvHelper.Configuration;
 using CsvHelper;
+using System.Globalization;
+using System.Xml.Linq;
 
 namespace T4_PR1.Pages
 {
@@ -27,8 +29,6 @@ namespace T4_PR1.Pages
         public List<WaterConsumption> SuspiciousConsumptionMunicipalities { get; set; } = new List<WaterConsumption>();
         public List<WaterConsumption> IncreasingTrendMunicipalities { get; set; } = new List<WaterConsumption>();
 
-        public List<WaterConsumption> XmlWaterConsumptions { get; set; } = new List<WaterConsumption>();
-        public bool XmlFileExists { get; set; } = false;
         public void OnGet(int? pageNumber)
         {
             if (pageNumber.HasValue)
@@ -40,25 +40,32 @@ namespace T4_PR1.Pages
             string xmlFilePath = Path.Combine("ModelData","water_consumption_data.xml");
             try
             {
-                if (System.IO.File.Exists(xmlFilePath))
-                {
-                    try
-                    {
-                        XmlWaterConsumptions = UsingFiles.XMLHelperTool.ReadXMLFile<WaterConsumption>(xmlFilePath);
-                        XmlFileExists = true;
-                    }
-                    catch (Exception xmlEx)
-                    {
-                        _logger.LogError(xmlEx, "Error en llegir el fitxer XML.");
-                        ModelState.AddModelError(string.Empty, "Error al carregar les dades del fitxer XML.");
-                        XmlWaterConsumptions = new List<WaterConsumption>();
-                        XmlFileExists = false;
-                    }
-                }
                 WaterConsumptions = UsingFiles.CsvHelperTool.ReadCsvFile<WaterConsumption>(filePathCsv);
 
-                WaterConsumptions.AddRange(XmlWaterConsumptions); //Afegim el llistat xml a la llista del csv
+                if (System.IO.File.Exists(xmlFilePath))
+                {                         
+                    if (System.IO.File.Exists(xmlFilePath))
+                    {
 
+                        XDocument doc = XDocument.Load(xmlFilePath);
+                       var  XmlWaterConsumptions = doc.Root.Elements("Consum")
+                           .Select(x => new WaterConsumption
+                           {
+                               Year = int.Parse(x.Element("Any").Value),
+                               RegionCode = int.Parse(x.Element("CodiComarca").Value),
+                               Region = x.Element("Comarca").Value,
+                               Population = int.Parse(x.Element("Poblacio").Value),
+                               DomesticNet = double.Parse(x.Element("DomesticXarxa").Value, CultureInfo.InvariantCulture),
+                               EconomyActivity = double.Parse(x.Element("ActivitatsEconomiquesIFontsPropies").Value, CultureInfo.InvariantCulture),
+                               Total = double.Parse(x.Element("Total").Value, CultureInfo.InvariantCulture),
+                               DomesticConsumptionCapita = double.Parse(x.Element("ConsumDomesticPerCapita").Value, CultureInfo.InvariantCulture)
+                           })
+                           .ToList();
+
+                            WaterConsumptions.AddRange(XmlWaterConsumptions); //Afegim el llistat xml a la llista del csv
+                    }
+
+                }
                 TotalPages = (int)Math.Ceiling((double)WaterConsumptions.Count / PageSize);
 
                 // Obte les dades de la pagina actual

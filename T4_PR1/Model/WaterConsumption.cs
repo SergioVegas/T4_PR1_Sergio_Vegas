@@ -1,8 +1,9 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace T4_PR1.Model
-{
+{         
     public class WaterConsumption
     {
        
