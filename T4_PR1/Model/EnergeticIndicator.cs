@@ -5,9 +5,9 @@ namespace T4_PR1.Model
 {
     public class EnergeticIndicator
     {
-        [Required(ErrorMessage = "La Data  és obligatori.")]
         [Name("Data")]
-        public string Data { get; set; }
+        [Required(ErrorMessage = "La Data  és obligatori.")]
+        public string? Data { get; set; }
 
         [Name("PBEE_Hidroelectr")]
         public double PBEE_Hidroelectr { get; set; }
