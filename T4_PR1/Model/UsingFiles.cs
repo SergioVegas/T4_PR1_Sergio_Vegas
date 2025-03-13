@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace T4_PR1.Model
 {
-    public class UsingFiles
+    public static class UsingFiles
     {  /// <summary>
        /// Llegeix una llista d'objectes de tipus T des d'un fitxer CSV.
        /// </summary>
@@ -75,7 +75,7 @@ namespace T4_PR1.Model
         /// <param name="filePath">La ruta completa al fitxer JSON.</param>
         /// <param name="newData">La llista d'objectes a serialitzar i desar al fitxer.</param>
         /// <param name="logger">(Opcional) Un objecte ILogger per registrar esdeveniments i errors.</param>
-        public static class JSONHelperTool
+        public static class JsonHelperTool
         {
             public static void WriteJsonFile<T>(string filePath, List<T> newData)
             {
@@ -111,7 +111,10 @@ namespace T4_PR1.Model
                 {
                     string  jsonFromFile = System.IO.File.ReadAllText(filePathJSON);
                     var records = System.Text.Json.JsonSerializer.Deserialize<List<T>>(jsonFromFile);
-                    informationJson.AddRange(records);
+                    if (records != null)
+                    {
+                        informationJson.AddRange(records);
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -59,7 +59,7 @@ namespace T4_PR1.Pages
                     }
                 }
                 NewWEnergeticIndicator.Add(Indicador);
-                UsingFiles.JSONHelperTool.WriteJsonFile(filePathJson, NewWEnergeticIndicator);
+                UsingFiles.JsonHelperTool.WriteJsonFile(filePathJson, NewWEnergeticIndicator);
 
                 return RedirectToPage("/EnergyIndicator");
             }
