@@ -78,9 +78,8 @@ else
 }
 
 <br />
-
 <h2>Resum consum realitzats</h2>
-    <table class="table">
+<table class="table">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.CurrentPageEnergeticIndicators.FirstOrDefault().Data)</th>
@@ -172,8 +171,7 @@ else
             </tr>
         }
     </tbody>
-    </table>
-
+</table>
 
 <div class="pagination">
     <a asp-page="./EnergyIndicator" asp-route-pageNumber="@(Model.PageNumber - 1)"

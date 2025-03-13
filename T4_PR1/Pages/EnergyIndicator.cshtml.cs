@@ -40,7 +40,7 @@ namespace T4_PR1.Pages
                 {
 
                     UsingFiles.JSONHelperTool.ReadJsonFile(filePathJson, EnergeticIndicatorsJson);
-                    //Console.WriteLine("-------------> llegueixo el json");
+                    Console.WriteLine("-------------> llegueixo el json");
                 }
               
                 TotalPages = (int)Math.Ceiling((double)EnergeticIndicators.Count / PageSize);
@@ -68,25 +68,25 @@ namespace T4_PR1.Pages
             //Registres amb producció neta superior a 3000
             int productionAsked = 3000;
             var produccionOver3000 = EnergeticIndicators
-                .Where(w => w.CDEEBC_ProdNeta> productionAsked)
+                .Where(w => w.CDEEBC_ProdNeta > productionAsked)
                 .OrderBy(w => w.CDEEBC_ProdNeta)
                 .ToList();
             //Registres amb consum de gasolina superior a 100
-           /* int GasConsumptionAsked = 100;
+            int GasConsumptionAsked = 100;
             var gasOver100 = EnergeticIndicators
                 .Where(w => w.CCAC_GasolinaAuto > GasConsumptionAsked)
                 .OrderByDescending(w => w.CCAC_GasolinaAuto)
                 .ToList();
             //Mitjana de producció neta per cada any
-           *var mitjanaProduccioNetaPerAny = EnergeticIndicators
-                .GroupBy(e => e.Data.(3, 4)) 
+            var mitjanaProduccioNetaPerAny = EnergeticIndicators
+                .GroupBy(e => e.Data.Substring(3, 4))
                 .Select(g => new
                 {
                     Any = g.Key,
                     Mitjana = g.Average(e => e.CDEEBC_ProdNeta)
                 })
                 .OrderBy(a => a.Any)
-                .ToList();*/
+                .ToList();
             //Registres amb demanda elèctrica superior a 4000 i producció disponible inferior a 300
 
             int electricDemandAsked = 4000;

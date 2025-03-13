@@ -54,101 +54,99 @@ namespace T4_PR1.Model
         [Required(ErrorMessage = "El CDEEBC_DemandaElectr  és obligatori.")]
         public double CDEEBC_DemandaElectr { get; set; }
 
-        [Default(0)]
+
         [Name("CDEEBC_TotalEBCMercatRegulat")]
         public string? CDEEBC_TotalEBCMercatRegulat { get; set; }
 
-        [Default(0)]
         [Name("CDEEBC_TotalEBCMercatLliure")]
         public string? CDEEBC_TotalEBCMercatLliure { get; set; }
 
-        [Default(0)]
+     
         [Name("FEE_Industria")]
-        public string? FEE_Industria { get; set; }
+        public double? FEE_Industria { get; set; }
 
-        [Default(0)]
+    
         [Name("FEE_Terciari")]
-        public string? FEE_Terciari { get; set; }
+        public double? FEE_Terciari { get; set; }
 
-        [Default(0)]
+   
         [Name("FEE_Domestic")]
-        public string? FEE_Domestic { get; set; }
+        public double? FEE_Domestic { get; set; }
 
-        [Default(0)]
+     
         [Name("FEE_Primari")]
-        public string? FEE_Primari { get; set; }
+        public double? FEE_Primari { get; set; }
 
-        [Default(0)]
+      
         [Name("FEE_Energetic")]
-        public string? FEE_Energetic { get; set; }
+        public double? FEE_Energetic { get; set; }
 
-        [Default(0)]
+  
         [Name("FEEI_ConsObrPub")]
-        public string? FEEI_ConsObrPub { get; set; }
+        public double? FEEI_ConsObrPub { get; set; }
 
-        [Default(0)]
+     
         [Name("FEEI_SiderFoneria")]
-        public string? FEEI_SiderFoneria { get; set; }
+        public double? FEEI_SiderFoneria { get; set; }
 
-        [Default(0)]
+     
         [Name("FEEI_Metalurgia")]
-        public string? FEEI_Metalurgia { get; set; }
+        public double? FEEI_Metalurgia { get; set; }
 
-        [Default(0)]
+   
         [Name("FEEI_IndusVidre")]
-        public string? FEEI_IndusVidre { get; set; }
+        public double? FEEI_IndusVidre { get; set; }
 
-        [Default(0)]
+    
         [Name("FEEI_CimentsCalGuix")]
-        public string? FEEI_CimentsCalGuix { get; set; }
+        public double? FEEI_CimentsCalGuix { get; set; }
 
-        [Default(0)]
+      
         [Name("FEEI_AltresMatConstr")]
-        public string? FEEI_AltresMatConstr { get; set; }
+        public double? FEEI_AltresMatConstr { get; set; }
 
-        [Default(0)]
+       
         [Name("FEEI_QuimPetroquim")]
-        public string? FEEI_QuimPetroquim { get; set; }
+        public double? FEEI_QuimPetroquim { get; set; }
 
-        [Default(0)]
+        
         [Name("FEEI_ConstrMedTrans")]
-        public string? FEEI_ConstrMedTrans { get; set; }
+        public double? FEEI_ConstrMedTrans { get; set; }
 
-        [Default(0)]
+        
         [Name("FEEI_RestaTransforMetal")]
-        public string? FEEI_RestaTransforMetal { get; set; }
+        public double? FEEI_RestaTransforMetal { get; set; }
 
-        [Default(0)]
+        
         [Name("FEEI_AlimBegudaTabac")]
-        public string? FEEI_AlimBegudaTabac { get; set; }
+        public double? FEEI_AlimBegudaTabac { get; set; }
 
-        [Default(0)]
         [Name("FEEI_TextilConfecCuirCalçat")]
-        public string? FEEI_TextilConfecCuirCalçat { get; set; }
+        public double? FEEI_TextilConfecCuirCalçat { get; set; }
 
-        [Default(0)]
+        
         [Name("FEEI_PastaPaperCartro")]
-        public string? FEEI_PastaPaperCartro { get; set; }
+        public double? FEEI_PastaPaperCartro { get; set; }
 
-        [Default(0)]
+       
         [Name("FEEI_AltresIndus")]
-        public string? FEEI_AltresIndus { get; set; }
+        public double? FEEI_AltresIndus { get; set; }
 
         [Name("DGGN_PuntFrontEnagas")]
-        public string? DGGN_PuntFrontEnagas { get; set; }
+        public double DGGN_PuntFrontEnagas { get; set; }
 
         [Name("DGGN_DistrAlimGNL")]
-        public string DGGN_DistrAlimGNL { get; set; }
+        public double DGGN_DistrAlimGNL { get; set; }
 
         [Name("DGGN_ConsumGNCentrTerm")]
-        public string DGGN_ConsumGNCentrTerm { get; set; }
+        public double DGGN_ConsumGNCentrTerm { get; set; }
 
         [Name("CCAC_GasolinaAuto")]
         [Required(ErrorMessage = "El CCAC_GasolinaAuto  és obligatori.")]
-        public string CCAC_GasolinaAuto { get; set; }
+        public double CCAC_GasolinaAuto { get; set; }
 
         [Name("CCAC_GasoilA")]
-        public string CCAC_GasoilA { get; set; }
+        public double CCAC_GasoilA { get; set; }
 
     }
 }
