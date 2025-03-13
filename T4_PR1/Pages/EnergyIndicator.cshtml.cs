@@ -67,13 +67,13 @@ namespace T4_PR1.Pages
             }
             //Registres amb producció neta superior a 3000
             int productionAsked = 3000;
-            var produccionOver3000 = EnergeticIndicators
+             produccionOver3000 = EnergeticIndicators
                 .Where(w => w.CDEEBC_ProdNeta > productionAsked)
                 .OrderBy(w => w.CDEEBC_ProdNeta)
                 .ToList();
             //Registres amb consum de gasolina superior a 100
             int GasConsumptionAsked = 100;
-            var gasOver100 = EnergeticIndicators
+            gasOver100 = EnergeticIndicators
                 .Where(w => w.CCAC_GasolinaAuto > GasConsumptionAsked)
                 .OrderByDescending(w => w.CCAC_GasolinaAuto)
                 .ToList();
@@ -91,7 +91,7 @@ namespace T4_PR1.Pages
 
             int electricDemandAsked = 4000;
             int produccionAvailableAsked = 300;
-            var electricDemandAndProdcutionAvailable = EnergeticIndicators
+             electricDemandAndProdcutionAvailable = EnergeticIndicators
                .Where(w => w.CDEEBC_DemandaElectr > electricDemandAsked && w.CDEEBC_ProdDisp < produccionAvailableAsked)
                 .ToList();
         }
