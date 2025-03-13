@@ -31,8 +31,15 @@ namespace T4._PR1._Practica_1.EnegyClass
         { DateSimulation = date;  Name = name; CostEnergy = costEnergy; PriceEnergy = priceEnergy; Rati = rati; GeneratedEnergy = generatedEnergy; TotalPrice = totalPrice; TotalCost = totalCost; }
      
         public virtual double CalculateEnergy()=>0;
-
+        /// <summary>
+        /// Calcula el cost total de l'energia despesa
+        /// </summary>
+        /// <returns>La quantitat de diners</returns>
         public double CalculateTotalCost() => CostEnergy * GeneratedEnergy;
+        /// <summary>
+        /// Calcula el preu total de l'energia despesa
+        /// </summary>
+        /// <returns>La quantitat de diners</returns>
         public double CalculateTotalPrice()=> CostEnergy * PriceEnergy;
 
     }

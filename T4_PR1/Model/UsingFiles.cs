@@ -99,6 +99,12 @@ namespace T4_PR1.Model
                     
                 }
             }
+            /// <summary>
+            /// LLegeix les dades d'un Json i les magatzema en una llista.
+            /// </summary>
+            /// <typeparam name="T">El tipus d'objecte a la llista</typeparam>
+            /// <param name="filePathJSON"> La ruta completa al fitxer JSON</param>
+            /// <param name="informationJson">Llitsa on enmagatzemar l'informació</param>
             public static void ReadJsonFile<T>(string filePathJSON, List<T> informationJson)
             {
                 try

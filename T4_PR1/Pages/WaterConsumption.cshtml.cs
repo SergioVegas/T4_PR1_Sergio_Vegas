@@ -85,6 +85,9 @@ namespace T4_PR1.Pages
                 ModelState.AddModelError(string.Empty, "Error al carrega les dades.");
             }
         }
+        /// <summary>
+        /// Funcio per fer les LinQ dels consum d'aigua.
+        /// </summary>
         public void ConsumptionWaterAnalisis()
         {
             if (WaterConsumptions == null || WaterConsumptions.Count == 0)

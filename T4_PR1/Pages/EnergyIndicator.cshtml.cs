@@ -40,7 +40,7 @@ namespace T4_PR1.Pages
                 {
 
                     UsingFiles.JSONHelperTool.ReadJsonFile(filePathJson, EnergeticIndicatorsJson);
-                    Console.WriteLine("-------------> llegueixo el json");
+                    //Console.WriteLine("-------------> llegueixo el json");
                 }
               
                 TotalPages = (int)Math.Ceiling((double)EnergeticIndicators.Count / PageSize);
@@ -59,6 +59,9 @@ namespace T4_PR1.Pages
                 ModelState.AddModelError(string.Empty, "Error carregant less dades: " + ex.Message);
             }
         }
+        /// <summary>
+        /// Funcio per fer les LinQ dels indicaddors d'energia
+        /// </summary>
         public void EnergyIndicatorsAnalisis()
         {
             if (EnergeticIndicators == null || EnergeticIndicators.Count == 0)
@@ -91,9 +94,9 @@ namespace T4_PR1.Pages
 
             int electricDemandAsked = 4000;
             int produccionAvailableAsked = 300;
-             electricDemandAndProdcutionAvailable = EnergeticIndicators
-               .Where(w => w.CDEEBC_DemandaElectr > electricDemandAsked && w.CDEEBC_ProdDisp < produccionAvailableAsked)
-                .ToList();
+            electricDemandAndProdcutionAvailable = EnergeticIndicators
+            .Where(w => w.CDEEBC_DemandaElectr > electricDemandAsked && w.CDEEBC_ProdDisp < produccionAvailableAsked)
+            .ToList();
         }
     }
 }
