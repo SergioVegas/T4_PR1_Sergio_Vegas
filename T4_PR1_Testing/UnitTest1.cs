@@ -20,7 +20,7 @@ public class SolarSystemTests
     public void CalculateSolarEnergyInCorrectEnergy()
     {
         // Arrange
-        SolarSystem solarSystem = new SolarSystem { SunHours = 3.2, Rati = 1 };
+        SolarSystem solarSystem = new SolarSystem { SunHours = 3.2, Rati = 0 };
 
         // Act
         double energy = solarSystem.CalculateEnergy();
