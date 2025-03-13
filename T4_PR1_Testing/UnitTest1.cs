@@ -85,4 +85,88 @@ public class WindSystemTests
             Assert.NotEqual(1, energy);
         }
     }
+    public class EnergySystemTests
+    {
+        [Fact]
+        public void CalculateTotalCostReturnsCorrectCost()
+        {
+            // Arrange
+            EnergySystem energySystem = new EnergySystem { CostEnergy = 10, GeneratedEnergy = 5 };
+
+            // Act
+            double totalCost = energySystem.CalculateTotalCost();
+
+            // Assert
+            Assert.Equal(50, totalCost);
+        }
+
+        [Fact]
+        public void CalculateTotalCostReturnsInCorrectCost()
+        {
+            // Arrange
+            EnergySystem energySystem = new EnergySystem { CostEnergy = 10, GeneratedEnergy = 5 };
+
+            // Act
+            double totalCost = energySystem.CalculateTotalCost();
+
+            // Assert
+            Assert.NotEqual(58, totalCost);
+        }
+
+        [Fact]
+        public void CalculateTotalCost_CostEnergyZero_ReturnsZeroCost()
+        {
+            // Arrange
+            EnergySystem energySystem = new EnergySystem { CostEnergy = 0, GeneratedEnergy = 5 };
+
+            // Act
+            double totalCost = energySystem.CalculateTotalCost();
+
+            // Assert
+            Assert.Equal(0, totalCost);
+        }
+        [Fact]
+        public void CalculateTotalPriceCorrectPrice()
+        {
+            // Arrange
+            double costEnergy = 10;
+            double priceEnergy = 5;
+            EnergySystem system = new EnergySystem { CostEnergy = costEnergy, PriceEnergy = priceEnergy };
+
+            // Act
+            double result = system.CalculateTotalPrice();
+
+            // Assert
+            Assert.Equal(50, result);
+        }
+
+        [Fact]
+        public void CalculateTotalPriceInCorrectPrice()
+        {
+            // Arrange
+            double costEnergy = 12;
+            double priceEnergy = 8;
+            EnergySystem system = new EnergySystem { CostEnergy = costEnergy, PriceEnergy = priceEnergy };
+
+            // Act
+            double result = system.CalculateTotalPrice();
+
+            // Assert
+            Assert.NotEqual(50, result);
+        }
+        [Fact]
+        public void CalculateTotalPriceIsZero()
+        {
+            // Arrange
+            double costEnergy = 10;
+            double priceEnergy = 0;
+            EnergySystem system = new EnergySystem { CostEnergy = costEnergy, PriceEnergy = priceEnergy };
+
+            // Act
+            double result = system.CalculateTotalPrice();
+
+            // Assert
+            Assert.Equal(0, result);
+        }
+    }
 }
